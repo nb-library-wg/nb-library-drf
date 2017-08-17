@@ -2,7 +2,19 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 
 from rest_framework import viewsets
-from library.api.serializers import UserSerializer
+from library.api.models import Book
+from library.api.serializers import (
+    BookSerializer,
+    UserSerializer,
+)
+
+
+class BookViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Book.objects.all()[:10]
+    serializer_class = BookSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
